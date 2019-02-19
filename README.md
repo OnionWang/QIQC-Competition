@@ -2,7 +2,7 @@ Quara Insincere Questions Classification Competition Summary
 ===================================
 
   
-This is my first competition in kaggle, here are some thoughts and tricks.
+This is my first competition in kaggle, my final rank is 73/4037(Silver Medal), here are some thoughts and tricks.
 
 My kernel is : https://www.kaggle.com/wangcong95/qicq-competition
 
