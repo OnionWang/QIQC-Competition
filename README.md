@@ -23,7 +23,7 @@ This competition is a kernel only competition, which can not use external data; 
 Data Cleaning And Word Embedding
 --------
 
-At first, I think stronger data cleaning will get better f1-score. However, with the more clean method I use, my f1-score didn't get better and sometimeseven get worse. I think hold some noise in original data may help models get more robustness features. When I see 3rd place solution, I found they didn't use complex data cleaning skills, but a simple way to add text coverage in pre-trained word embeddings. Most of us just average 2 or 3 embeddings as embedding layer weight. Average is a simple way to get better features, and indeed get better f1-score; however, it may lose some information, if we add it in different weight, or concat in different combination and sequence, we may get more information and more varierence models.
+At first, I think stronger data cleaning will get better f1-score. However, with strong clean method using, my f1-score didn't get better and sometimes even get worse. I think hold some noise in original data may help models get more robustness features. When I see 3rd place solution, I found they didn't use complex data cleaning skills, but a simple way to add text coverage in pre-trained word embeddings. Most of us just average 2 or 3 embeddings as embedding layer weight. Average is a simple way to get better features, and indeed get better f1-score; however, it may lose some information, if we add it in different weight, or concat in different combination and sequence, we may get more information and more varierence models.
 
 Model Structure
 --------
