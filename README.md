@@ -73,6 +73,9 @@ Here are what I have learned from this competition:
  - checkpoint ensemble seems at a pretty timesaving way, another interesting method is Stochastic Weight Averaging (SWA:https://arxiv.org/abs/1802.10026)
 
 Then I use these tricks to rewrite my kernel:
+
+https://www.kaggle.com/wangcong95/qicq-rewrite-after-competition?scriptVersionId=10684524
+
 padding at batch level reduce train time, thus I use 3 fold repeat 4 times(total 12 models) to ensemble, and fine-tune embedding layer at every last epoch. My local test score from 0.7009 become 0.7021 without changing model structure and data-preprocess.
 
  I also tried checkpoint ensemble, it indeed add my single fole score, but also add similarity, which lower my final score. SWA looks like attractive, but I may do it wrong way.
