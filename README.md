@@ -1,4 +1,5 @@
 Quara Insincere Questions Classification Competition Summary
+
 This is my first competition in kaggle, here are some thoughts and tricks.
 
 My kernel is : https://www.kaggle.com/wangcong95/qicq-competition
@@ -9,10 +10,10 @@ Describe
 
 This is a binaray classification problem, give you one short question, you should identify whether it is sincere. An insincere question is defined as a question intended to make a statement rather than look for helpful answers. Some characteristics that can signify that a question is insincere:
 
-Has a non-neutral tone
-Is disparaging or inflammatory
-Isn't grounded in reality
-Uses sexual content (incest, bestiality, pedophilia) for shock value, and not to seek genuine answers
+1.Has a non-neutral tone
+2.Is disparaging or inflammatory
+3.Isn't grounded in reality
+4.Uses sexual content (incest, bestiality, pedophilia) for shock value, and not to seek genuine answers
 
 This competition is a kernel only competition, which can not use external data; By the way, you should finish this task with in 2 hours if you use GPU, otherwise 6 hours is required. That means you cannot use transfer model like BERT, and you cannot ensemble hundred of models without thinking.
 
@@ -25,7 +26,9 @@ Model Structure
 Here are two kernels which got the most high f1-score in public kernels:
 
 https://www.kaggle.com/jannen/reaching-0-7-fork-from-bilstm-attention-kfold
+
 https://www.kaggle.com/artgor/text-modelling-in-pytorch
+
 These two kernel are both use pytorch and fix seed to reproduce the result. I used NN model but a little different from it. In fact, it is more simple. Structure is just like this:
 
 I didn't use spartialdropout, it is a very strong regulation skill, and can get a pretty good f1-score by single model, but need more epoches to let model overfit. At first I used it and every fold cv is about 0.6900, average cv is 0.6887, it looks pretty good. But when ensemble, I can only get 0.6960 in public LB, however those cv is 0.6700 can get 0.7000 in public LB. Then I found it helpful to overfit model. That's what I want to say in next section. By the way, I used CycleLearnRate to adapt my learn rate, which promote my model score.
@@ -43,20 +46,21 @@ Yes, ensemble will promote performance, if your models have low correlation, you
 
 Useless Try
 
-add static features
-use different loss function
-use the layer before output layer as text features, use xgboost to predict final target
-change model structure to add varierace
-stronger data cleaning
-use transformer as encoder
-Useful Skills
+1.add static features
+2.use different loss function
+3.use the layer before output layer as text features, use xgboost to predict final target
+4.change model structure to add varierace
+5.stronger data cleaning
+6.use transformer as encoder
+7.Useful Skills
 
 Here are what I have learned from this competition:
 
-a little overfitting can get better performance for ensemble model
-padding at batch level can really speed up train process
-fine-tune at last epoch can raise your model performance
-checkpoint ensemble seems at a pretty timesaving way, another interesting method is Stochastic Weight Averaging (SWA:https://arxiv.org/abs/1802.10026)
+1.a little overfitting can get better performance for ensemble model
+2.padding at batch level can really speed up train process
+3.fine-tune at last epoch can raise your model performance
+4.checkpoint ensemble seems at a pretty timesaving way, another interesting method is Stochastic Weight Averaging (SWA:https://arxiv.org/abs/1802.10026)
+
 Then I use these tricks to rewrite my kernel: padding at batch level reduce train time, thus I use 3 fold repeat 4 times(total 12 models) to ensemble, and fine-tune embedding layer at every last epoch. My local test score from 0.7009 become 0.7021 without changing model structure and data-preprocess.
 
 I also tried checkpoint ensemble, it indeed add my single fole score, but also add similarity, which lower my final score. SWA looks like attractive, but I may do it wrong way.
